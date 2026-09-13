@@ -57,7 +57,7 @@ photo ─▶ YOLOv8n detector ─▶ crop the fruit ─▶ ResNet18 classifier �
 kamias-defect-detection/
 ├── app.py                     # Gradio demo: upload a photo → YOLO crop → prediction
 ├── requirements.txt           # pinned dependencies (see Setup)
-├── models/                    # trained weights (see "Data & weights" note below)
+├── models/                    # trained weights — NOT in this repo, see "Model weights" below
 │   ├── yolov8_kamias.pt       #   trained detector
 │   ├── resnet_baseline.pth    #   252 labeled images
 │   ├── resnet_ssl.pth         #   semi-supervised — best model
@@ -82,13 +82,25 @@ kamias-defect-detection/
     ├── count_dataset.py       # dataset composition audit
     ├── check_pseudo.py        # pseudo-label accuracy audit
     └── find_money_shot.py     # find the strongest demo images for the video
+
+main.py                        # batch YOLO cropper (utility, project root)
 ```
 
-> **Data & weights.** `dataset/`, `outputs/`, and all model weights (`*.pt`, `*.pth`)
-> are excluded from Git via `.gitignore` because of their size. They are provided in the
-> submission archive. The dataset can also be re-split from the raw images, and every
-> weight file can be regenerated from scratch using the commands under
-> "Reproducing the results."
+---
+
+## Model weights
+
+The trained model files (`*.pt`, `*.pth`, ~150MB total) are **not included in this
+Git repository** — they are excluded via `.gitignore` because of their size. They
+are provided separately here:
+
+> **Download the trained models:** [Google Drive](https://drive.google.com/drive/folders/1RGfY7rOaX4Hg8xKmaasA2emcqRmY1qWQ?usp=sharing)
+
+To run the demo or the evaluation scripts, download the four files from that link
+and place them in the `models/` folder in this repo (see `models/README.md` for
+exactly which files go there). The dataset can also be re-split from the raw images,
+and every weight file can be regenerated from scratch using the commands under
+"Reproducing the results" below.
 
 ---
 
@@ -117,6 +129,8 @@ python -m venv venv
 
 # 3. Install all dependencies (this includes the CUDA 12.8 PyTorch build)
 pip install -r requirements.txt
+
+# 4. Download the trained models (see "Model weights" above) into models/
 ```
 
 ---
